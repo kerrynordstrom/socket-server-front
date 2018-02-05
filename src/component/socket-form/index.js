@@ -35,10 +35,7 @@ class SocketForm extends Component {
 
     if (!roomNameError) {
       // Rob - if the user doesn't have a socket open, open one
-      if (!this.props.socket) {
-        this.props.socketConnect();
-      }
-
+      // const socket = this.props.socket || this.props.socketConnect();
       this.props.onComplete(roomName);
       this.setState(this.emptyState);
     } else {
@@ -81,7 +78,7 @@ class SocketForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  socket: !!state.socket,
+  socket: state.socket,
 });
 
 const mapDispatchToProps = dispatch => ({

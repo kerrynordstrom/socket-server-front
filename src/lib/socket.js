@@ -9,11 +9,11 @@ export default dispatch => { // TODO: Rob - takes in dispatch to allow state cha
     // TODO: HANDLE ROOM CONFLICT, modal popup warning
   });
 
-  socket.on('room created', data => {
-    console.log(data); 
+  socket.on('room created', room => {
+    console.log(room); 
     // TODO: HANDLE ROOM CREATION, take to room dashboard
     // TODO: SET STATE of ROOM to owner: true
-    dispatch(setRoomAction('this is a room fa show!'));
+    dispatch(setRoomAction(room));
   });
 
   socket.on('room joined', data => {
@@ -33,4 +33,9 @@ export default dispatch => { // TODO: Rob - takes in dispatch to allow state cha
   });
 
   return socket;
+};
+
+export const createRoomEmit = (room, socket) => {
+  // TODO: Kerry - Consider a socket class with this page's methods defined within
+  socket.emit('create room', room);
 };

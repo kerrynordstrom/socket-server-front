@@ -4,6 +4,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { createRoomEmit } from '../../lib/socket';
 import AuthForm from '../auth-form';
 import SocketForm from '../socket-form';
 import { signupAction, loginAction, logoutAction } from '../../action/auth';
@@ -24,7 +25,7 @@ class Landing extends Component {
           <button onClick={() => this.props.logout(this.props.socket)}>Logout</button>
         </div>
         <h3>Create</h3>
-        <SocketForm type="create" onComplete={this.props.create} />
+        <SocketForm type="create" onComplete={this.props.createRoom} />
         <h3>Join</h3>
         <SocketForm type="join" onComplete={this.props.join} />
       </Fragment>
@@ -37,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
   login: userData => dispatch(loginAction(userData)),
   logout: socket => dispatch(logoutAction(socket)),
   join: roomName => dispatch(joinRoomAction(roomName)),
-  create: roomName => dispatch(createRoomAction(roomName)),
+  createRoom: roomName => dispatch(createRoomAction(roomName)),
 });
 
 const mapStateToProps = state => ({
